@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harthill Installations App</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #000;
+  color: #fff;
+  margin: 0;
+}
+
+header {
+  background: #b30000;
+  padding: 15px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.container {
+  padding: 15px;
+}
+
+input, textarea, button {
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+}
+
+button {
+  background: #b30000;
+  color: white;
+}
+
+.section {
+  background: #111;
+  padding: 10px;
+  margin-top: 15px;
+  border-radius: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
+img {
+  width: 100%;
+  margin-top: 5px;
+  border-radius: 5px;
+}
+</style>
+</head>
+
+<body>
+
+<header>Harthill Installations</header>
+
+<div id="login" class="container">
+  <h3>Enter PIN</h3>
+  <input type="password" id="pin" maxlength="6" placeholder="6-digit PIN">
+  <button onclick="login()">Login</button>
+</div>
+
+<div id="app" class="container hidden">
+
+  <h3>New Job</h3>
+
+  <input id="name" placeholder="Customer Name">
+  <input id="address" placeholder="Address">
+  <input id="date" type="date">
+
+  <div class="section">
+    <h4>Before Photos</h4>
+    <input type="file" accept="image/*" capture="camera" multiple>
+  </div>
+
+  <div class="section">
+    <h4>During Photos</h4>
+    <input type="file" accept="image/*" capture="camera" multiple>
+  </div>
+
+  <div class="section">
+    <h4>After Photos</h4>
+    <input type="file" accept="image/*" capture="camera" multiple>
+  </div>
+
+  <div class="section">
+    <h4>Issues</h4>
+    <textarea placeholder="Damaged items"></textarea>
+    <textarea placeholder="Missing items"></textarea>
+    <textarea placeholder="Wrong items"></textarea>
+    <textarea placeholder="General notes"></textarea>
+  </div>
+
+  <div class="section">
+    <h4>Signature</h4>
+    <canvas id="sign" width="300" height="150"
+     style="background:#fff;width:100%"></canvas>
+    <button onclick="clearSign()">Clear</button>
+  </div>
+
+  <button onclick="saveJob()">Save Job</button>
+
+</div>
+
+<script>
+let savedPin = localStorage.getItem("pin");
+
+if(!savedPin){
+  let p = prompt("Set your 6-digit PIN:");
+  localStorage.setItem("pin", p);
+}
+
+function login(){
+  let pin = document.getElementById("pin").value;
+  if(pin === localStorage.getItem("pin")){
+    document.getElementById("login").classList.add("hidden");
+    document.getElementById("app").classList.remove("hidden");
+  } else {
+    alert("Wrong PIN");
+  }
+}
+
+function saveJob(){
+  alert("Job saved (demo version)");
+}
+
+/* Signature */
+
+let canvas = document.getElementById("sign");
+let ctx = canvas.getContext("2d");
+let drawing = false;
+
+canvas.addEventListener("touchstart", ()=>drawing=true);
+canvas.addEventListener("touchend", ()=>drawing=false);
+canvas.addEventListener("touchmove", draw);
+
+function draw(e){
+  if(!drawing) return;
+  let r = canvas.getBoundingClientRect();
+  let x = e.touches[0].clientX - r.left;
+  let y = e.touches[0].clientY - r.top;
+
+  ctx.lineWidth = 2;
+  ctx.lineCap = "round";
+  ctx.strokeStyle = "black";
+
+  ctx.lineTo(x,y);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(x,y);
+
+  e.preventDefault();
+}
+
+function clearSign(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+}
+</script>
+
+</body>
+</html>
