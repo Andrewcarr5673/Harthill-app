@@ -182,17 +182,15 @@ function clearSign(){
 
 <script>
 function sendBackup() {
+
   document.getElementById("bf_customer").value =
-    document.getElementById("customerName")?.value || "";
+    document.getElementById("name")?.value || "";
 
   document.getElementById("bf_address").value =
     document.getElementById("address")?.value || "";
 
   document.getElementById("bf_date").value =
-    document.getElementById("jobDate")?.value || "";
-
-  document.getElementById("bf_reference").value =
-    document.getElementById("jobRef")?.value || "";
+    document.getElementById("date")?.value || "";
 
   document.getElementById("bf_issues").value =
     document.getElementById("issues")?.value || "";
@@ -202,6 +200,7 @@ function sendBackup() {
 
   document.getElementById("backupForm").submit();
 }
+</script>
 </script>
 </body>
 </html>
