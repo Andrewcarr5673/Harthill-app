@@ -73,7 +73,7 @@ img {
   <h3>New Job</h3>
 
   <input id="name" placeholder="Customer Name">
-  <input id="address" placeholder="Address">
+  <input id="site" placeholder="Site">
   <input id="date" type="date">
 
   <div class="section">
@@ -93,10 +93,10 @@ img {
 
   <div class="section">
     <h4>Issues</h4>
-    <textarea placeholder="Damaged items"></textarea>
-    <textarea placeholder="Missing items"></textarea>
-    <textarea placeholder="Wrong items"></textarea>
-    <textarea placeholder="General notes"></textarea>
+    <textarea id="damaged" placeholder="Damaged items"></textarea>
+<textarea id="missing" placeholder="Missing items"></textarea>
+<textarea id="wrong" placeholder="Wrong items"></textarea>
+<textarea id="notes" placeholder="General notes"></textarea>
   </div>
 
   <div class="section">
@@ -193,7 +193,9 @@ function sendBackup() {
     document.getElementById("date")?.value || "";
 
   document.getElementById("bf_issues").value =
-    document.getElementById("issues")?.value || "";
+  "Damaged: " + (document.getElementById("damaged")?.value || "") + "\n" +
+  "Missing: " + (document.getElementById("missing")?.value || "") + "\n" +
+  "Wrong: " + (document.getElementById("wrong")?.value || "");
 
   document.getElementById("bf_notes").value =
     document.getElementById("notes")?.value || "";
