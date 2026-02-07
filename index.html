@@ -164,6 +164,44 @@ function clearSign(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
 }
 </script>
+<!-- Harthill Job Backup Form -->
+<form
+  id="backupForm"
+  action="https://formspree.io/f/xaqbolbw"
+  method="POST"
+  enctype="multipart/form-data"
+  style="display:none;"
+>
+  <input type="text" name="customer" id="bf_customer">
+  <input type="text" name="address" id="bf_address">
+  <input type="text" name="date" id="bf_date">
+  <input type="text" name="reference" id="bf_reference">
+  <textarea name="issues" id="bf_issues"></textarea>
+  <textarea name="notes" id="bf_notes"></textarea>
+</form>
 
+<script>
+function sendBackup() {
+  document.getElementById("bf_customer").value =
+    document.getElementById("customerName")?.value || "";
+
+  document.getElementById("bf_address").value =
+    document.getElementById("address")?.value || "";
+
+  document.getElementById("bf_date").value =
+    document.getElementById("jobDate")?.value || "";
+
+  document.getElementById("bf_reference").value =
+    document.getElementById("jobRef")?.value || "";
+
+  document.getElementById("bf_issues").value =
+    document.getElementById("issues")?.value || "";
+
+  document.getElementById("bf_notes").value =
+    document.getElementById("notes")?.value || "";
+
+  document.getElementById("backupForm").submit();
+}
+</script>
 </body>
 </html>
