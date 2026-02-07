@@ -181,26 +181,27 @@ function clearSign(){
 </form>
 
 <script>
-function sendBackup() {
+<form id="backupForm"
+      action="https://formspree.io/f/xaqbolbw"
+      method="POST"
+      enctype="multipart/form-data"
+      style="display:none;">
 
-  document.getElementById("bf_customer").value =
-    document.getElementById("name")?.value || "";
+  <!-- Hidden text fields -->
+  <input type="text" name="customer" id="bf_customer">
+  <input type="text" name="address" id="bf_address">
+  <input type="text" name="date" id="bf_date">
+  <input type="text" name="reference" id="bf_reference">
 
-  document.getElementById("bf_address").value =
-    document.getElementById("address")?.value || "";
+  <textarea name="issues" id="bf_issues"></textarea>
+  <textarea name="notes" id="bf_notes"></textarea>
 
-  document.getElementById("bf_date").value =
-    document.getElementById("date")?.value || "";
+  <!-- Photo uploads -->
+  <input type="file" name="before_photos" id="bf_before" accept="image/*" multiple>
+  <input type="file" name="during_photos" id="bf_during" accept="image/*" multiple>
+  <input type="file" name="after_photos" id="bf_after" accept="image/*" multiple>
 
-  document.getElementById("bf_issues").value =
-  "Damaged: " + (document.getElementById("damaged")?.value || "") + "\n" +
-  "Missing: " + (document.getElementById("missing")?.value || "") + "\n" +
-  "Wrong: " + (document.getElementById("wrong")?.value || "");
-
-  document.getElementById("bf_notes").value =
-    document.getElementById("notes")?.value || "";
-
-  document.getElementById("backupForm").submit();
+</form>
 }
 </script>
 </script>
